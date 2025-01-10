@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import SplitType from "split-type";
 import gsap from "gsap";
 import "./Menu.css";
@@ -7,7 +8,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 const Menu = () => {
  
   useEffect(() => {
-    // Initialize SplitType on the text element
+    
     new SplitType(".my-text");
 
     // GSAP animation for the text
@@ -21,18 +22,14 @@ const Menu = () => {
 
   return (
     <div className="menu-container">
-      <div className="top-bar">
-        <div className="logo">EON FORGE</div>
-        <div className="menu-bar">
-          <button
-           className="menu-button"
-          >
-            Home
-          </button>
-          <button className="menu-button">Marketplace</button>
-          <button className="menu-button">Profile</button>
-          <button className="menu-button">Meet the Team</button>
-          <ConnectButton/>
+    <div className="top-bar">
+      <div className="logo">EON FORGE</div>
+      <div className="menu-bar">
+      <Link to="/" className="menu-button">Home</Link>
+       <Link to="/profile" className="menu-button" >Profile</Link>
+       <Link to="/home" className="menu-button">Marketplace</Link>
+        <button className="menu-button">Meet the Team</button>
+         <ConnectButton/>
         </div>
       </div>
 
