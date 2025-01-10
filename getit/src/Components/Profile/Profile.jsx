@@ -1,23 +1,29 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate
 import './profile.css';
 
 const Profile = () => {
+  const navigate = useNavigate();  // Hook for navigation
+
   return (
     <div className="profile-container">
-    <div className="top-bar">
+      <div className="top-bar">
         <div className="logo">EON FORGE</div>
         <div className="menu-bar">
+          {/* ✅ Updated Home Button to Navigate */}
           <button
-           className="menu-button"
+            className="menu-button"
+            onClick={() => navigate('/')}  
           >
             Home
           </button>
-          <button className="menu-button">Marketplace</button>
-          <button className="menu-button">Profile</button>
-          <button className="menu-button">Meet the Team</button>
+          <button className="menu-button"  onClick={() => navigate('/home')}  >Marketplace</button>
+          <button className="menu-button" onClick={() => navigate('/profile')}>Profile</button>
+          <button className="menu-button" onClick={() => navigate('/Event')}>Meet the Team</button>
           
         </div>
       </div>
+
       <header className="header">
         <div className="user-info">
           <h1>Masego</h1>

@@ -91,26 +91,26 @@ background-color: #fb4222;
 
 .menu-bar {
   display: flex;
-  gap: 50px;
+  gap: 100px;
   margin-right: 100px;
 }
 
 .menu-button {
   text-transform: uppercase;
-  
-  color: rgb(255, 255, 255);
+  color: rgb(252, 252, 252);
   font-size: 17px;
   font-weight: 600;
-  border: 2px solid #ff4500;
+  padding: 0.5em 1em;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+
   box-shadow: 0 0 0 0 #ff4500;
 }
 
 .menu-button:hover {
   transform: translateY(-4px) translateX(-2px);
   box-shadow: 2px 5px 0 0 rgb(231, 231, 231);
-  background-color:#000000;
+  background-color:#ff4500;
 }
 
 .menu-button:active {
@@ -157,7 +157,7 @@ background-color: #fb4222;
   margin-top: 100px;
   display: flex;
   overflow: hidden;
-  height: 80px; /* Increased height for better visibility */
+  height: 40px; /* Increased height for better visibility */
   user-select: none;
   gap: 2rem;
   padding-top: 1rem;
@@ -169,7 +169,6 @@ background-color: #fb4222;
 
 .marquee:hover {
   -webkit-text-stroke: 1.5px #ff4500;
-  text-stroke: 1.5px #fff;
   -webkit-text-fill-color: transparent;
   color: transparent;
   transition: all 0.5s ease;
@@ -205,9 +204,9 @@ background-color: #fb4222;
   }
 }
 
-@media only screen and (min-width: 360px) {
+@media only screen and (min-width: 300px) {
   .marquee__group span {
-      font-size: 100px;
+      font-size: 50px;
   }
 }
 .char {
@@ -230,4 +229,33 @@ background-color: #fb4222;
 100% {
   transform: translateY(0);
 }
+}
+
+
+
+
+.bounce-button {
+background-color: #fb4222;
+text-transform: uppercase;
+animation: bounce 1s ease infinite;
+transition: background-color 0.3s;
+color: rgb(252, 252, 252);
+font-size: 17px;
+font-weight: 600;
+padding: 0.5em 1em;
+cursor: pointer;
+transition: all 0.3s ease-in-out;
+box-shadow: 0 0 0 0 #ff4500;
+}
+
+.bounce-button:hover {
+transform: translateY(-4px) translateX(-2px);
+box-shadow: 2px 5px 0 0 rgb(231, 231, 231);
+background-color:#000000;
+}
+
+.bounce-button:active {
+background-color: #fb4222;
+transform: translateY(2px) translateX(1px);
+box-shadow: 0 0 0 0 #ff4500;
 }

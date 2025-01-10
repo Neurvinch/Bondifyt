@@ -6,26 +6,30 @@ body {
   background-color: #000000;
   color: #fff;
 }
-
+::selection{
+  background-color: #ff4500;
+}
 .profile-container {
   padding: 20px;
+  
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-image:url(../../assets/image-15.jpg);
-  padding: 20px;
+  padding: 10px;
   border-radius: 8px;
 }
 
 .header .user-info h1 {
-  margin-left:30px;
+  margin-left:20px;
   font-size: 24px;
+  
 }
 .para{
-  margin-left: 30px;
+  margin-left:20px;
+  font-size: 30px;
 }
 .menu-button {
   margin-left:30px;
@@ -115,7 +119,7 @@ body {
 
 .marquee:hover {
   -webkit-text-stroke: 1.5px #ff4500;
-  
+  text-stroke: 1.5px #fff;
   -webkit-text-fill-color: transparent;
   color: transparent;
   transition: all 0.5s ease;
@@ -162,6 +166,7 @@ border-radius: 80px;
 }
 
 .htag{
+
 font-weight:bolder;
 text-align: center;
 font-size: xx-large;
