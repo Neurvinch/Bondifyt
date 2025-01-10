@@ -1,0 +1,82 @@
+/* Basic Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #fff;
+  }
+  
+  .profile-container {
+    padding: 20px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .header .user-info h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .header button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .project-section, .activity-section, .community-section {
+    margin-top: 20px;
+  }
+  
+  .project-grid, .community-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  
+  .project-item, .community-item {
+    background-color: #1e1e1e;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+  }
+  
+  .project-item button, .community-item button {
+    padding: 5px 10px;
+    background-color: #17a2b8;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .activity-section .activity-chart {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .activity-section .chart-placeholder {
+    width: 100%;
+    height: 150px;
+    background-color: #2e2e2e;
+    margin-top: 10px;
+    border-radius: 8px;
+  }
+  
+  .image-placeholder {
+    width: 100%;
+    height: 100px;
+    background-color: #333;
+    border-radius: 8px;
+  }
