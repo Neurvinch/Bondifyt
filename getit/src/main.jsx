@@ -17,7 +17,7 @@ const ProjectId = "59b576c34d862c7fdf81c794d8d97580";
 const config = getDefaultConfig({
   appName: "My RainbowKit App",
   projectId: ProjectId,
-  chains:  [, sepolia],
+  chains:  [ sepolia],
   transports: {
     
     [sepolia.id] : http("https://eth-sepolia.g.alchemy.com/v2/nnffSo4AIuDE8YzCNfIDXPqk083tBO_8")

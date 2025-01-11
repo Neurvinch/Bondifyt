@@ -28,7 +28,7 @@ const EventPage = () => {
     ? new ethers.Contract(contractAddress, eventAbi, walletClient)
     : null;
 
-  const fetchEvents = useCallback(async () => {
+  /* const fetchEvents = useCallback(async () => {
     if (!contract) return;
     setLoading(true);
     setError("");
@@ -62,7 +62,7 @@ const EventPage = () => {
     if (isConnected) {
       fetchEvents();
     }
-  }, [isConnected, fetchEvents]);
+  }, [isConnected, fetchEvents]); */
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -90,7 +90,7 @@ const EventPage = () => {
       );
       await tx.wait();
       alert("Event created successfully!");
-      fetchEvents(); // Refresh events after creation
+      //  fetchEvents(); // Refresh events after creation
     } catch (err) {
       setError("Failed to create event. Please check your inputs.");
       console.error("Error creating event:", err);
