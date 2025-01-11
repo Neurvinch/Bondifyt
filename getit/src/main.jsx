@@ -8,7 +8,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
-import { mainnet, sepolia } from "viem/chains";
+import {  sepolia } from "viem/chains";
 import { http } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -17,11 +17,9 @@ const ProjectId = "59b576c34d862c7fdf81c794d8d97580";
 const config = getDefaultConfig({
   appName: "My RainbowKit App",
   projectId: ProjectId,
-  chains:  [mainnet, sepolia],
+  chains:  [, sepolia],
   transports: {
-    [mainnet.id]: http(
-      "https://eth-mainnet.g.alchemy.com/v2/nnffSo4AIuDE8YzCNfIDXPqk083tBO_8"
-    ),
+    
     [sepolia.id] : http("https://eth-sepolia.g.alchemy.com/v2/nnffSo4AIuDE8YzCNfIDXPqk083tBO_8")
   },
 });
@@ -40,7 +38,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider chains={[mainnet] [sepolia]}  theme={theme}>
+        <RainbowKitProvider chains={ [sepolia]}  theme={theme}>
           <App />
         </RainbowKitProvider>
       </QueryClientProvider>
