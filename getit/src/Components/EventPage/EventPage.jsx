@@ -5,28 +5,46 @@ import { useNavigate } from 'react-router-dom';
 const EventPage = () => {
     const navigate = useNavigate(); 
   const [selectedOption, setSelectedOption] = useState("");
-  const [eventDetails, setEventDetails] = useState({
-    title: "",
-    description: "",
-    date: "",
+  const [eventData , setEventData] = useState({
+      name: '',
+      description: '',
+      entryFee : 0,
+      isPublic: true,
+      startTime : "",
+      endTime : "",
   });
-  const [events, setEvents] = useState([]);
+  
+
+  const handleChange = ( e) =>{
+    const {name , value} = e.target;
+    setEventData(
+       (prev) =>({...prev,[name] : value})
+    )
+   }
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEventDetails({ ...eventDetails, [name]: value });
-  };
+  const CreateEvent = async () => {
+    const Contract =  new ethers.Contract()// bruh fill this
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add the new event to the events list
-    setEvents([...events, eventDetails]);
-    setEventDetails({ title: "", description: "", date: "" });
-  };
+    try {
+        const tx = await Contract.CreateEvent(
+            eventData.name,
+            eventData.description,
+            ethers.utils.parseEther(eventData.entryFee.toString()),
+            eventData.isPublic,
+            Math.floor( new Date(eventData.startTime).getTime() / 1000),
+            Math.floor(new Date (eventData.endTime).getTime() / 1000)
+        )
+        await tx.wait();
+        alert(" Event created");
+        
+    } catch (error) {
+         console.error(error);
+    }
+}
 
   return (
     <div className="menu-container">
@@ -64,41 +82,35 @@ const EventPage = () => {
         {selectedOption === "conduct" && (
           <div className="event-conduct">
             <h2>Conduct Your Event</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={CreateEvent}>
               <div className="form-group">
                 <label htmlFor="title">Event Title</label>
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  value={eventDetails.title}
-                  onChange={handleInputChange}
-                  required
-                />
+                <input name="name" onChange={handleChange} placeholder="Event Name" />
               </div>
               <div className="form-group">
                 <label htmlFor="description">Event Description</label>
-                <textarea
-                  id="description"
-                  name="description"
-                  value={eventDetails.description}
-                  onChange={handleInputChange}
-                  required
-                ></textarea>
+                <input name="description" onChange={handleChange} placeholder="Description" />
               </div>
+
+             <div className="form-group"><label htmlFor="entryFee"   /><input name="entryFee" onChange={handleChange} placeholder="Entry Fee (ETH)" type="number" />
+                        </div> 
+
+
               <div className="form-group">
-                <label htmlFor="date">Event Date</label>
-                <input
-                  type="date"
-                  id="date"
-                  name="date"
-                  value={eventDetails.date}
-                  onChange={handleInputChange}
-                  required
-                />
+                <label htmlFor="date">Event Start Time</label>
+                <input name="startTime" onChange={handleChange} type="datetime-local" />
               </div>
-              <button type="submit" className="submit-button">
-                Submit Event
+
+
+              <div className="form-group">
+                <label htmlFor="date">Event End Time </label>
+                <input name="endTime" onChange={handleChange} type="datetime-local" />
+              </div>
+
+
+
+              <button type="submit" onClick={CreateEvent} className="submit-button">
+                Create  Event
               </button>
             </form>
           </div>
@@ -106,18 +118,18 @@ const EventPage = () => {
         {selectedOption === "view" && (
           <div className="event-view">
             <h2>View Available Events</h2>
-            {events.length === 0 ? (
+            {eventData.length === 0 ? (
               <p>No events available. Create an event to display here.</p>
             ) : (
               <ul className="event-list">
-                {events.map((event, index) => (
+                {eventData.map((event, index) => (
                   <li key={index} className="event-item">
-                    <h3>{event.title}</h3>
+                    <h3>{event.name}</h3>
                     <p>
                       <strong>Description:</strong> {event.description}
                     </p>
                     <p>
-                      <strong>Date:</strong> {event.date}
+                      <strong>Date:</strong> {event.startTime}
                     </p>
                   </li>
                 ))}
