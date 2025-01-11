@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';  // Import useNavigate
-import './profile.css';
+import './Profile.css';
 
 const Profile = () => {
   const navigate = useNavigate();  // Hook for navigation
