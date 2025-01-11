@@ -173,19 +173,6 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "eventId",
-				"type": "uint256"
-			}
-		],
-		"name": "RegisterForEvent",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
 			}
@@ -303,7 +290,7 @@
 				"type": "string"
 			}
 		],
-		"name": "grantAcess",
+		"name": "grantAccess",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -343,6 +330,19 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "eventId",
+				"type": "uint256"
+			}
+		],
+		"name": "registerForEvent",
+		"outputs": [],
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{

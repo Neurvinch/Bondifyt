@@ -2,9 +2,12 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
+    background-color: #ececec;
     color: #ffffff;
   }
   ::selection{
     background-color: #ff4500;
+  }
+  .app{
+    background-color: #e7d8d8
   }

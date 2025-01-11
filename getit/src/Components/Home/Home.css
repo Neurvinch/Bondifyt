@@ -16,7 +16,7 @@ body {
   
   /* Banner Section */
   .banner {
-    background-color: #fcfcfc;
+    background-color: #322b2b;
     padding: 40px;
     border-radius: 10px;
     text-align: center;
@@ -24,14 +24,15 @@ body {
   }
   
   .banner h1 {
+    background-color: #000;
     font-size: 36px;
     font-weight: bold;
     line-height: 1.4;
   }
   
   .banner h1 span {
-    color: #ff4500;
-    background-color: white;
+    color: #ffffff;
+    background-color: rgb(0, 0, 0);
   }
   
   .explore-btn {
