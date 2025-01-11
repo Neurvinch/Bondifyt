@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Profile from "../src/Components/Profile/Profile"
 import Home from './Components/Home/Home';
 import Event from "../src/Components/EventPage/EventPage"
+import Minting from './Components/Minting';
 
 function App() {
   const {address, isConnected} = useAccount();
@@ -20,6 +21,7 @@ function App() {
           <Route path = "/home" element = {<Home/>} />
           < Route path = "/Event" element = { <Event/>}
 />          
+        <Route path ="/create" element ={<Minting/>} />
 
       </Routes>
     </Router>

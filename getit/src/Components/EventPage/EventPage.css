@@ -132,7 +132,9 @@ body {
     color:rgb(255, 255, 255);
   }
   
- 
+  .textone {
+    color: rgb(194, 187, 187);
+  }
   
   /* Top bar with logo and menu */
   .top-bar {

@@ -1,7 +1,8 @@
 import React,{useState} from 'react'
 import {useWalletClient} from 'wagmi'
 import {ethers} from 'ethers'
-
+import contractABI from "../abi/MintingAbi.json"
+import '../Minting.css'
 const Minting = () => {
 const { data : walletClient } = useWalletClient();
 const [tokenId , setTokenID] = useState ("");
@@ -11,7 +12,10 @@ const [rentalPrice , setRentalPrice] = useState("");
 const [ message ,setMessage] = useState("");
 
 
-const Contract = new ethers.Contract()
+const contractAddress = "0xd9145CCE52D386f254917e481eB44e9943F39138"
+
+
+const Contract = new ethers.Contract( contractAddress , contractABI , walletClient);
 
 const mintingPost = async () =>{
     try {
@@ -58,7 +62,8 @@ const getUsers = async () =>{
 };
 
   return (
-    <div>
+    <div >
+      
       <h2>NFT Manager</h2>
       <div>
         <label>Token ID:</label>
@@ -92,7 +97,7 @@ const getUsers = async () =>{
           onChange={(e) => setRentalPrice(e.target.value)}
         />
       </div>
-      <button onClick={mintPost}>Mint NFT</button>
+      <button onClick={mintingPost}>Mint NFT</button>
       <button onClick={rentalPost}>Rent NFT</button>
       <button onClick={getUsers}>Get Users</button>
       {message && <p>{message}</p>}

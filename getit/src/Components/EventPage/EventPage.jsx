@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import "./EventPage.css";
+import { useWalletClient,useAccount } from "wagmi";
 import { useNavigate } from 'react-router-dom';
+import eventAbi from '../../abi/eventAbi.json'
+import{ethers} from 'ethers'
 
 const EventPage = () => {
     const navigate = useNavigate(); 
@@ -13,7 +16,57 @@ const EventPage = () => {
       startTime : "",
       endTime : "",
   });
+
+  const { data : walletClient, error, isLoading } = useWalletClient();
+  const {address , isconnected  } = useAccount();
+
+
+
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const loadEvents = async () => {
+      const fetchedEvents = await fetchEvents();
+      setEvents(fetchedEvents);
+    };
+    loadEvents();
+  }, [fetchEvents]);
+
+
+
+  async function initializeContract() {
+    try {
+      if (typeof window.ethereum !== "undefined") {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const address = await signer.getAddress();
+        const myContractAddress = "0xd7B63981A38ACEB507354DF5b51945bacbe28414";
+        const contract = new ethers.Contract(
+          myContractAddress,
+          eventAbi,
+          signer
+        );
+        console.log(contract);
+        return { provider, signer, address, contract };
+      } else {
+        throw new Error("MetaMask not found");
+      }
+    } catch (error) {
+      console.error('Error initializing contract:', error);
+      throw error;
+    }
+  }
+
+
+
+
+
+
+
+ //  const contractaddress ="0xd7B63981A38ACEB507354DF5b51945bacbe28414"
   
+
+
 
   const handleChange = ( e) =>{
     const {name , value} = e.target;
@@ -27,10 +80,10 @@ const EventPage = () => {
   };
 
   const CreateEvent = async () => {
-    const Contract =  new ethers.Contract()// bruh fill this
+    
 
     try {
-        const tx = await Contract.CreateEvent(
+        const tx = await contract.CreateEvent(
             eventData.name,
             eventData.description,
             ethers.utils.parseEther(eventData.entryFee.toString()),
@@ -45,6 +98,42 @@ const EventPage = () => {
          console.error(error);
     }
 }
+
+const registerForEvent = async (eventId, entryFee) => {
+  if (!contract) return;
+  try {
+    const tx = await contract.registerForEvent(eventId, { value: ethers.utils.parseEther(entryFee) });
+    await tx.wait();
+    console.log("Registered for event successfully");
+  } catch (error) {
+    console.error("Error registering for event:", error);
+  }
+};
+
+
+const fetchEvents = async () => {
+  if (!contract) return;
+  try {
+    const eventCount = await contract.eventCount();
+    const events = [];
+    for (let i = 1; i <= eventCount; i++) {
+      const eventDetails = await contract.Events(i);
+      events.push({
+        id: i,
+        name: eventDetails.name,
+        description: eventDetails.description,
+        entryFee: ethers.utils.formatEther(eventDetails.entryFee),
+        isPublic: eventDetails.isPublic,
+        creator: eventDetails.creator,
+        startTime: new Date(eventDetails.startTime * 1000).toLocaleString(),
+        endTime: new Date(eventDetails.endTime * 1000).toLocaleString(),
+      });
+    }
+    return events;
+  } catch (error) {
+    console.error("Error fetching events:", error);
+  }
+};
 
   return (
     <div className="menu-container">
@@ -85,26 +174,26 @@ const EventPage = () => {
             <form onSubmit={CreateEvent}>
               <div className="form-group">
                 <label htmlFor="title">Event Title</label>
-                <input name="name" onChange={handleChange} placeholder="Event Name" />
+                <input name="name" onChange={handleChange} placeholder="Event Name" className="textone" />
               </div>
               <div className="form-group">
                 <label htmlFor="description">Event Description</label>
-                <input name="description" onChange={handleChange} placeholder="Description" />
+                <input name="description" onChange={handleChange} placeholder="Description" className="textone" />
               </div>
 
-             <div className="form-group"><label htmlFor="entryFee"   /><input name="entryFee" onChange={handleChange} placeholder="Entry Fee (ETH)" type="number" />
+             <div className="form-group"><label htmlFor="entryFee"   /><input name="entryFee" onChange={handleChange} placeholder="Entry Fee (ETH)" type="number" className="textone" />
                         </div> 
 
 
-              <div className="form-group">
+              <div className="form-group ">
                 <label htmlFor="date">Event Start Time</label>
-                <input name="startTime" onChange={handleChange} type="datetime-local" />
+                <input name="startTime" onChange={handleChange} type="datetime-local" className="textone"  />
               </div>
 
 
               <div className="form-group">
                 <label htmlFor="date">Event End Time </label>
-                <input name="endTime" onChange={handleChange} type="datetime-local" />
+                <input name="endTime" onChange={handleChange} type="datetime-local"  className="textone"/>
               </div>
 
 
@@ -122,14 +211,14 @@ const EventPage = () => {
               <p>No events available. Create an event to display here.</p>
             ) : (
               <ul className="event-list">
-                {eventData.map((event, index) => (
+                {eventData.map((eventData, index) => (
                   <li key={index} className="event-item">
-                    <h3>{event.name}</h3>
+                    <h3>{eventData.name}</h3>
                     <p>
-                      <strong>Description:</strong> {event.description}
+                      <strong>Description:</strong> {eventData.description}
                     </p>
                     <p>
-                      <strong>Date:</strong> {event.startTime}
+                      <strong>Date:</strong> {eventData.startTime}
                     </p>
                   </li>
                 ))}

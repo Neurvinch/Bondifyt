@@ -29,7 +29,7 @@ const Profile = () => {
           <h1>Masego</h1>
           <p className='para'>1.7M Followers</p>
           <button className='menu-button'>Follow</button>
-          <button className="menu-button secondary-button">+</button>
+          <button className="menu-button secondary-button" onClick={() => navigate('/create')}>+</button>
         </div>
       </header>
 
