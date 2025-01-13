@@ -130,3 +130,7 @@ placeholder="Try Wasd"
 }
 
 export default Chat
+
+
+
+// need to work on this dynamically more and more
